@@ -24,7 +24,7 @@ public class LoginActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        mUsername = (EditText) findViewById(R.id.login_username);
+        mUsername = findViewById(R.id.login_username);
 
         Bundle extras = getIntent().getExtras();
         if (extras != null){

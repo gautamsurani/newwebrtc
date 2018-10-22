@@ -53,9 +53,9 @@ public class ChatAdapter extends ArrayAdapter<ChatMessage> {
         if (convertView == null) {
             holder = new ViewHolder();
             convertView = inflater.inflate(R.layout.chat_message_row_layout, parent, false);
-            holder.sender = (TextView) convertView.findViewById(R.id.chat_user);
-            holder.message = (TextView) convertView.findViewById(R.id.chat_message);
-            holder.timeStamp = (TextView) convertView.findViewById(R.id.chat_timestamp);
+            holder.sender = convertView.findViewById(R.id.chat_user);
+            holder.message = convertView.findViewById(R.id.chat_message);
+            holder.timeStamp = convertView.findViewById(R.id.chat_timestamp);
             convertView.setTag(holder);
             Log.d("Adapter", "Recreating fadeout.");
         } else {
@@ -101,8 +101,7 @@ public class ChatAdapter extends ArrayAdapter<ChatMessage> {
         .withEndAction(new Runnable() {
             @Override
             public void run() {
-                if (values.contains(message))
-                    values.remove(message);
+                values.remove(message);
                 notifyDataSetChanged();
                 view.setAlpha(1);
             }
@@ -113,8 +112,7 @@ public class ChatAdapter extends ArrayAdapter<ChatMessage> {
         Log.i("AdapterFade", "Caling Fade3");
         long elapsed = System.currentTimeMillis() - message.getTimeStamp();
         if (elapsed >= FADE_TIMEOUT){
-            if (values.contains(message))
-                values.remove(message);
+            values.remove(message);
             notifyDataSetChanged();
             return;
         }
@@ -122,9 +120,7 @@ public class ChatAdapter extends ArrayAdapter<ChatMessage> {
                 .withEndAction(new Runnable() {
                     @Override
                     public void run() {
-                        if (values.contains(message)){
-                            values.remove(message);
-                        }
+                        values.remove(message);
                         notifyDataSetChanged();
                         view.setAlpha(1);
                     }
@@ -135,8 +131,7 @@ public class ChatAdapter extends ArrayAdapter<ChatMessage> {
     private void setFadeOut(final View view, final ChatMessage message){
         long elapsed = System.currentTimeMillis() - message.getTimeStamp();
         if (elapsed >= FADE_TIMEOUT){
-            if (values.contains(message))
-                values.remove(message);
+            values.remove(message);
             notifyDataSetChanged();
             return;
         }
@@ -158,9 +153,7 @@ public class ChatAdapter extends ArrayAdapter<ChatMessage> {
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                if (values.contains(message)){
-                    values.remove(message);
-                }
+                values.remove(message);
                 notifyDataSetChanged();
                 view.setAlpha(1);
                 view.setHasTransientState(false);

@@ -1,5 +1,6 @@
 package me.kevingleason.androidrtc;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Context;
@@ -87,8 +88,8 @@ public class VideoChatActivity extends ListActivity {
         }
         this.username      = extras.getString(Constants.USER_NAME, "");
         this.mChatList     = getListView();
-        this.mChatEditText = (EditText) findViewById(R.id.chat_input);
-        this.mCallStatus   = (TextView) findViewById(R.id.call_status);
+        this.mChatEditText = findViewById(R.id.chat_input);
+        this.mCallStatus   = findViewById(R.id.call_status);
 
         // Set up the List View for chatting
         List<ChatMessage> ll = new LinkedList<ChatMessage>();
@@ -128,7 +129,7 @@ public class VideoChatActivity extends ListActivity {
 
         // To create our VideoRenderer, we can use the included VideoRendererGui for simplicity
         // First we need to set the GLSurfaceView that it should render to
-        this.videoView = (GLSurfaceView) findViewById(R.id.gl_surface);
+        this.videoView = findViewById(R.id.gl_surface);
 
         // Then we set that view, and pass a Runnable to run once the surface is ready
         VideoRendererGui.setView(videoView, null);
@@ -235,7 +236,7 @@ public class VideoChatActivity extends ListActivity {
     }
 
     public List<PeerConnection.IceServer> getXirSysIceServers(){
-        List<PeerConnection.IceServer> servers = new ArrayList<PeerConnection.IceServer>();
+        List<PeerConnection.IceServer> servers = new ArrayList<>();
         try {
             servers = new XirSysRequest().execute().get();
         } catch (InterruptedException e){
@@ -345,6 +346,7 @@ public class VideoChatActivity extends ListActivity {
         public void onPeerConnectionClosed(PnPeer peer) {
             super.onPeerConnectionClosed(peer);
             VideoChatActivity.this.runOnUiThread(new Runnable() {
+                @SuppressLint("SetTextI18n")
                 @Override
                 public void run() {
                     mCallStatus.setText("Call Ended...");

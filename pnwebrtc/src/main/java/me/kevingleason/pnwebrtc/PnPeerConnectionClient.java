@@ -217,7 +217,7 @@ public class PnPeerConnectionClient {
 
     private class CreateOfferAction implements PnAction{
         public static final String TRIGGER = "init";
-        public void execute(String peerId, JSONObject payload) throws JSONException {
+        public void execute(String peerId, JSONObject payload) {
             Log.d("COAction","CreateOfferAction");
             PnPeer peer = peers.get(peerId);
             peer.setDialed(true);
@@ -273,7 +273,7 @@ public class PnPeerConnectionClient {
 
     private class PnUserHangupAction implements PnAction{
         public static final String TRIGGER = PnRTCMessage.JSON_HANGUP;
-        public void execute(String peerId, JSONObject payload) throws JSONException {
+        public void execute(String peerId, JSONObject payload) {
             Log.d("PnUserHangup","PnUserHangupAction");
             PnPeer peer = peers.get(peerId);
             peer.hangup();
@@ -338,7 +338,7 @@ public class PnPeerConnectionClient {
         @Override
         public void connectCallback(String channel, Object message) {
 			Log.i("conecct callback", "testing saja");
-            mRtcListener.onDebug(new PnRTCMessage(((JSONArray) message).toString()));
+            mRtcListener.onDebug(new PnRTCMessage(message.toString()));
             mRtcListener.onConnected(channel);
         }
 

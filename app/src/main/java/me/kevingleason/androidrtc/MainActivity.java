@@ -55,8 +55,8 @@ public class MainActivity extends ListActivity {
         this.stdByChannel = this.username + Constants.STDBY_SUFFIX;
 
         this.mHistoryList = getListView();
-        this.mCallNumET   = (EditText) findViewById(R.id.call_num);
-        this.mUsernameTV  = (TextView) findViewById(R.id.main_username);
+        this.mCallNumET   = findViewById(R.id.call_num);
+        this.mUsernameTV  = findViewById(R.id.main_username);
 
         this.mUsernameTV.setText(this.username);
         initPubNub();

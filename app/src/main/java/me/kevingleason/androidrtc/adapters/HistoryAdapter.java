@@ -67,10 +67,10 @@ public class HistoryAdapter extends ArrayAdapter<HistoryItem> {
         if (convertView == null) {
             holder = new ViewHolder();
             convertView    = inflater.inflate(R.layout.history_row_layout, parent, false);
-            holder.user    = (TextView) convertView.findViewById(R.id.history_name);
-            holder.status  = (TextView) convertView.findViewById(R.id.history_status);
-            holder.time    = (TextView) convertView.findViewById(R.id.history_time);
-            holder.callBtn = (ImageButton) convertView.findViewById(R.id.history_call);
+            holder.user    = convertView.findViewById(R.id.history_name);
+            holder.status  = convertView.findViewById(R.id.history_status);
+            holder.time    = convertView.findViewById(R.id.history_time);
+            holder.callBtn = convertView.findViewById(R.id.history_call);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
